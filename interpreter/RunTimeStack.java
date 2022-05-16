@@ -155,7 +155,4 @@ public class RunTimeStack
   public void write(){
     System.out.println(this.peek());
   }
-
-  public void sourceLine() {}
-
 }

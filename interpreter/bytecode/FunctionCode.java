@@ -6,7 +6,8 @@ public class FunctionCode extends ByteCode
 {
     private String byte_code;
     private String name;
-    private int offset;
+    private int start;
+    private int end;
 
     public FunctionCode(){}
 
@@ -15,12 +16,13 @@ public class FunctionCode extends ByteCode
     {
         this.byte_code = inputArgs[0];
         this.name = inputArgs[1];
-        this.offset = Integer.parseInt(inputArgs[2]);
+        this.start = Integer.parseInt(inputArgs[2]);
+        this.end = Integer.parseInt(inputArgs[3]);
     }
 
     @Override
     public String getString(){
-        return byte_code + " " + name + " " + offset;
+        return byte_code + " " + name + " " + start + " " + end;
     }
 
     @Override
