@@ -1,29 +1,76 @@
 package interpreter.debugger;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Stack;
+
 public class FunctionEnvironmentRecord {
 
-  public void beginScope() {
+  public HashMap<String, Stack<Integer>> variableMap = new HashMap<>();
+  public Stack<String> variableOrder = new Stack<>();
+  public ArrayList<String> recordList = new ArrayList<>();
 
+  public void print(){
+    System.out.println("< " + recordList.get(0)
+                      + ", " + recordList.get(1)
+                      + ", " + recordList.get(2)
+                      + ", " + recordList.get(3)
+                      + ", " + recordList.get(4) + " >" );
+  }
+
+  public void beginScope() {;
+    for(int i = 0; i < 5; i++){
+      recordList.add("-");
+    }
   }
 
   public void setFunctionInfo(String functionName, int startingLineNumber, int endingLineNumber) {
-
+    recordList.set(0, "()");
+    recordList.set(1, Integer.toString(startingLineNumber));
+    recordList.set(2, Integer.toString(endingLineNumber));
+    recordList.set(3, functionName);
   }
 
   public void setCurrentLineNumber(int currentLineNumber) {
-
+    recordList.set(4, Integer.toString(currentLineNumber));
   }
 
   public void enter(String symbol, int value) {
+    variableOrder.push(symbol);
+    if (variableMap.containsKey(symbol)){
+      variableMap.get(symbol).push(value);
+    }
+    else {
+      Stack<Integer> variableStack = new Stack<>();
+      variableStack.push(value);
+      variableMap.put(symbol, variableStack);
+    }
 
+    setRecordListVariables();
   }
 
   public void pop(int count) {
+    for(int i = 0; i < count; i++) {
+      String varToPop = variableOrder.pop();
+      variableMap.get(varToPop).pop();
+      if (variableMap.get(varToPop).empty()) variableMap.remove(varToPop);
+    }
+    setRecordListVariables();
+  }
 
+  public void setRecordListVariables() {
+    recordList.set(0, "(");
+    String output = recordList.get(0);
+    for (String key : variableMap.keySet()){
+      output += " <" + key + "," + variableMap.get(key).peek() + "> ";
+    }
+    output += ")";
+    recordList.set(0, output);
   }
 
   /**
    * Utility method to test your implementation. The output should be:
+   * <(<VARIABLE, INDEX>), STARTING#, ENDING#, NAME, CURRENT#>
    * (<>, -, -, -, -)
    * (<>, g, 1, 20, -)
    * (<>, g, 1, 20, 5)
@@ -38,30 +85,33 @@ public class FunctionEnvironmentRecord {
     FunctionEnvironmentRecord record = new FunctionEnvironmentRecord();
 
     record.beginScope();
-    System.out.println(record);
+    record.print();
 
     record.setFunctionInfo("g", 1, 20);
-    System.out.println(record);
+    record.print();
 
     record.setCurrentLineNumber(5);
-    System.out.println(record);
+    record.print();
 
     record.enter("a", 4);
-    System.out.println(record);
+    record.print();
 
     record.enter("b", 2);
-    System.out.println(record);
+    record.print();
 
     record.enter("c", 7);
-    System.out.println(record);
+    record.print();
 
     record.enter("a", 1);
-    System.out.println(record);
+    record.print();
 
     record.pop(2);
-    System.out.println(record);
+    record.print();
 
     record.pop(1);
-    System.out.println(record);
+    record.print();
+
+    record.pop(1);
+    record.print();
   }
 }
