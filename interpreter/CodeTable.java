@@ -35,4 +35,6 @@ public class CodeTable {
   }
 
   public static String get(String code) { return byteCodeMap.get(code); }
+
+  public static HashMap<String, String> getByteCodeMap () {return byteCodeMap;}
 }

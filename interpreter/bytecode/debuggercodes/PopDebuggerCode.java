@@ -7,6 +7,6 @@ public class PopDebuggerCode extends PopCode {
 
     @Override
     public void execute(VirtualMachine vm) {
-
+        super.execute(vm);
     }
 }

@@ -7,6 +7,6 @@ public class FormalDebuggerCode extends FormalCode {
 
     @Override
     public void execute(VirtualMachine vm) {
-
+        super.execute(vm);
     }
 }

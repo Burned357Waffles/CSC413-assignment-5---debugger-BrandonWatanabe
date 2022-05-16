@@ -7,6 +7,6 @@ public class LitDebuggerCode extends LitCode {
 
     @Override
     public void execute(VirtualMachine vm) {
-
+        super.execute(vm);
     }
 }

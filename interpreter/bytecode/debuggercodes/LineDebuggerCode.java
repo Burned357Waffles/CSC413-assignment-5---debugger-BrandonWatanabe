@@ -7,6 +7,6 @@ public class LineDebuggerCode extends LineCode {
 
     @Override
     public void execute(VirtualMachine vm) {
-
+        super.execute(vm);
     }
 }

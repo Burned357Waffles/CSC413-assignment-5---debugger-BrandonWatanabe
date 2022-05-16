@@ -7,6 +7,6 @@ public class ReturnDebuggerCode extends ReturnCode {
 
     @Override
     public void execute(VirtualMachine vm) {
-
+        super.execute(vm);
     }
 }

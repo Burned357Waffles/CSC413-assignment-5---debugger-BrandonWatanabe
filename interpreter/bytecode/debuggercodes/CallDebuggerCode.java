@@ -7,6 +7,6 @@ public class CallDebuggerCode extends CallCode {
 
     @Override
     public void execute(VirtualMachine vm) {
-
+        super.execute(vm);
     }
 }

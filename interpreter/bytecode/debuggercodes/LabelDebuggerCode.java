@@ -7,6 +7,6 @@ public class LabelDebuggerCode extends LabelCode {
 
     @Override
     public void execute(VirtualMachine vm) {
-
+        super.execute(vm);
     }
 }
