@@ -1,4 +1,12 @@
 package interpreter.bytecode.debuggercodes;
 
-public class LabelDebuggerCode {
+import interpreter.VirtualMachine;
+import interpreter.bytecode.LabelCode;
+
+public class LabelDebuggerCode extends LabelCode {
+
+    @Override
+    public void execute(VirtualMachine vm) {
+
+    }
 }

@@ -1,4 +1,12 @@
 package interpreter.bytecode.debuggercodes;
 
-public class LitDebuggerCode {
+import interpreter.VirtualMachine;
+import interpreter.bytecode.LitCode;
+
+public class LitDebuggerCode extends LitCode {
+
+    @Override
+    public void execute(VirtualMachine vm) {
+
+    }
 }

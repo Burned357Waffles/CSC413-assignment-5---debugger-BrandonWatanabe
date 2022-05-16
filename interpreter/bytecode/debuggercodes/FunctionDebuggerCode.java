@@ -1,4 +1,12 @@
 package interpreter.bytecode.debuggercodes;
 
-public class FunctionDebuggerCode {
+import interpreter.VirtualMachine;
+import interpreter.bytecode.FunctionCode;
+
+public class FunctionDebuggerCode extends FunctionCode {
+
+    @Override
+    public void execute(VirtualMachine vm) {
+
+    }
 }

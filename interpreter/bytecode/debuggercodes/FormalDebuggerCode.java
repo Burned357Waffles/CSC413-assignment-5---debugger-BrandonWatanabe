@@ -1,4 +1,12 @@
 package interpreter.bytecode.debuggercodes;
 
-public class FormalDebuggerCode {
+import interpreter.VirtualMachine;
+import interpreter.bytecode.FormalCode;
+
+public class FormalDebuggerCode extends FormalCode {
+
+    @Override
+    public void execute(VirtualMachine vm) {
+
+    }
 }

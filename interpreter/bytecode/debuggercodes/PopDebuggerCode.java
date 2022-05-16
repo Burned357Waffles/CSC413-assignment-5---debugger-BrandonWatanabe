@@ -1,4 +1,12 @@
 package interpreter.bytecode.debuggercodes;
 
-public class PopDebuggerCode {
+import interpreter.VirtualMachine;
+import interpreter.bytecode.PopCode;
+
+public class PopDebuggerCode extends PopCode {
+
+    @Override
+    public void execute(VirtualMachine vm) {
+
+    }
 }
