@@ -19,7 +19,7 @@ public class CodeTable {
     try
     {
       File codeFile = new File(byteCodeFile);
-      Scanner inputFile = inputFile = new Scanner(codeFile);
+      Scanner inputFile =  new Scanner(codeFile);
       while (inputFile.hasNext())
       {
         String nextLine = inputFile.nextLine();

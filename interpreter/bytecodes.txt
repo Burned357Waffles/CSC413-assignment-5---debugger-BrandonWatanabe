@@ -13,3 +13,6 @@ READ, ReadCode
 RETURN, ReturnCode
 STORE, StoreCode
 WRITE, WriteCode
+LINE, LineCode
+FORMAL, FormalCode
+FUNCTION, FunctionCode

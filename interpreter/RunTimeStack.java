@@ -156,6 +156,6 @@ public class RunTimeStack
     System.out.println(this.peek());
   }
 
-  public void line() {}
+  public void sourceLine() {}
 
 }
