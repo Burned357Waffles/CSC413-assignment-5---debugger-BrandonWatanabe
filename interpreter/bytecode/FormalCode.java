@@ -2,23 +2,25 @@ package interpreter.bytecode;
 
 import interpreter.VirtualMachine;
 
-public class PopCode extends ByteCode
+public class FormalCode extends ByteCode
 {
     private String byte_code;
-    private int argument;
+    private String name;
+    private int offset;
 
-    public PopCode(){}
+    public FormalCode(){}
 
     @Override
     public void init(String[] inputArgs)
     {
         this.byte_code = inputArgs[0];
-        this.argument = Integer.parseInt(inputArgs[1]);
+        this.name = inputArgs[1];
+        this.offset = Integer.parseInt(inputArgs[2]);
     }
 
     @Override
     public String getString(){
-        return byte_code + " " + argument;
+        return byte_code + " " + name + " " + offset;
     }
 
     @Override
@@ -27,10 +29,6 @@ public class PopCode extends ByteCode
     }
 
     @Override
-    public void execute(VirtualMachine vm)
-    {
-        vm.popN(argument);
-    }
-
+    public void execute(VirtualMachine vm) {}
 
 }

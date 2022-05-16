@@ -2,12 +2,12 @@ package interpreter.bytecode;
 
 import interpreter.VirtualMachine;
 
-public class PopCode extends ByteCode
+public class LineCode extends ByteCode
 {
     private String byte_code;
     private int argument;
 
-    public PopCode(){}
+    public LineCode(){}
 
     @Override
     public void init(String[] inputArgs)
@@ -27,10 +27,6 @@ public class PopCode extends ByteCode
     }
 
     @Override
-    public void execute(VirtualMachine vm)
-    {
-        vm.popN(argument);
-    }
-
+    public void execute(VirtualMachine vm) {}
 
 }
