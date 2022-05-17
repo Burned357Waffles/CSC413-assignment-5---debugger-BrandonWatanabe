@@ -1,8 +1,8 @@
-CALL, CallDebuggerCode
-LABEL, LabelDebuggerCode
-LIT, LitDebuggerCode
-POP, PopDebuggerCode
-RETURN, ReturnDebuggerCode
-LINE, LineDebuggerCode
-FORMAL, FormalDebuggerCode
-FUNCTION, FunctionDebuggerCode
+CALL, debuggercodes.CallDebuggerCode
+LABEL, debuggercodes.LabelDebuggerCode
+LIT, debuggercodes.LitDebuggerCode
+POP, debuggercodes.PopDebuggerCode
+RETURN, debuggercodes.ReturnDebuggerCode
+LINE, debuggercodes.LineDebuggerCode
+FORMAL, debuggercodes.FormalDebuggerCode
+FUNCTION, debuggercodes.FunctionDebuggerCode
