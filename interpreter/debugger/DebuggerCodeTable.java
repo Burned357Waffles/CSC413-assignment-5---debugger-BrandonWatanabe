@@ -14,7 +14,6 @@ public class DebuggerCodeTable {
 
   public static void init() {
     CodeTable.init();
-    codeMap = (HashMap<String, String>) CodeTable.getByteCodeMap().clone();
     populateMap();
   }
 
