@@ -1,21 +1,35 @@
 package interpreter.debugger.ui;
 
 import interpreter.debugger.Debugger;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Vector;
 
 public class DebuggerShell {
+  private Debugger debugger;
+  private String sourceFileName;
+  private HashMap<Integer, Vector<String>> lineMap = new HashMap<>();
+  private int currentLine = 1;
+
   public DebuggerShell(Debugger debugger, String sourceFileName) {
+    this.debugger = debugger;
+    this.sourceFileName = sourceFileName;
+
     try
     {
       File codeFile = new File(sourceFileName);
       Scanner inputFile =  new Scanner(codeFile);
+      int lineCounter = 1;
       while (inputFile.hasNext())
       {
         String nextLine = inputFile.nextLine();
-        System.out.println(nextLine);
+        Vector<String> lineVector = new Vector<>();
+        lineVector.add(nextLine);
+        lineVector.add("false");
+        lineMap.put(lineCounter, lineVector);
+        lineCounter++;
       }
       inputFile.close();
     }
@@ -23,11 +37,28 @@ public class DebuggerShell {
     {
       System.out.println("File " + sourceFileName + " not found." );
     }
+
+    new SourceCommand(this, currentLine).execute();
+  }
+
+  public HashMap<Integer, Vector<String>> getLineMap() { return lineMap;}
+
+  public void advanceCurrentLine(){
+    currentLine++;
   }
 
   public DebuggerCommand prompt() {
-    // Create the correct command object here, based on user interaction,
-    // and return
-    return null;
+    Scanner inputScanner = new Scanner(System.in);
+    System.out.println("Type ? for help");
+    String userInput = inputScanner.nextLine();
+    if (userInput.equals("?")) return new HelpCommand();
+    else if (userInput.equals("set")) return new SetCommand(this);
+    else if (userInput.equals("list")) return new ListCommand(this);
+    else if (userInput.equals("locals")) return new LocalsCommand();
+    else if (userInput.equals("source")) return new SourceCommand(this, currentLine);
+    else if (userInput.equals("step")) return new StepCommand(this);
+    else if (userInput.equals("continue")) return new ContinueCommand(this);
+    else if (userInput.equals("exit")) return new ExitCommand();
+    return new InvalidInputCommand();
   }
 }

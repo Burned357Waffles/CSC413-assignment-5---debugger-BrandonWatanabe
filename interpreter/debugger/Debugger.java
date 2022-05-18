@@ -3,7 +3,9 @@ package interpreter.debugger;
 import interpreter.ByteCodeLoader;
 import interpreter.Interpreter;
 import interpreter.Program;
+import interpreter.debugger.ui.DebuggerCommand;
 import interpreter.debugger.ui.DebuggerShell;
+import interpreter.debugger.ui.ExitCommand;
 
 
 public class Debugger extends Interpreter {
@@ -23,7 +25,12 @@ public class Debugger extends Interpreter {
     shell = new DebuggerShell(this, sourceFileName);
     Program program = byteCodeLoader.loadDebuggerCodes();
     DebuggerVirtualMachine vm = new DebuggerVirtualMachine(program, this);
-
-    shell.prompt().execute();
+    while (true) {
+      DebuggerCommand command = shell.prompt();
+      if (command instanceof ExitCommand){
+        break;
+      }
+      command.execute();
+    }
   }
 }
