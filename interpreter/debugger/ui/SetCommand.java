@@ -21,6 +21,7 @@ public class SetCommand extends DebuggerCommand{
         HashMap<Integer, Entry> lineMap = shell.getLineMap();
         Scanner input = new Scanner(System.in);
         System.out.println("Enter line number: ");
-        lineMap.get(input.nextInt()).setBreakpoint(true);
+        if (!input.hasNextInt()) System.out.println("Invalid input");
+        else lineMap.get(input.nextInt()).setBreakpoint(true);
     }
 }
