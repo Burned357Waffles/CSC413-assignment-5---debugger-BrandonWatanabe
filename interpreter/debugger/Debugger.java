@@ -14,14 +14,14 @@ public class Debugger extends Interpreter {
 
   public Debugger(String baseFileName) {
     super(baseFileName);
-    this.baseFileName = baseFileName;
-    sourceFileName = baseFileName.substring(0, baseFileName.length() - 4);
+    this.baseFileName = baseFileName; // Ex: factorial.x.cod
+    sourceFileName = baseFileName.substring(0, baseFileName.length() - 4); // Ex: factorial.x
   }
 
   @Override
   public void run() {
     shell = new DebuggerShell(this, sourceFileName);
-    Program program = byteCodeLoader.loadCodes(true);
+    Program program = byteCodeLoader.loadDebuggerCodes();
     DebuggerVirtualMachine vm = new DebuggerVirtualMachine(program, this);
 
     shell.prompt().execute();

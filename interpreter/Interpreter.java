@@ -18,7 +18,7 @@ public class Interpreter {
   }
 
   public void run() {
-    Program program = byteCodeLoader.loadCodes(false);
+    Program program = byteCodeLoader.loadCodes();
     vm = new VirtualMachine(program);
     vm.executeProgram();
   }

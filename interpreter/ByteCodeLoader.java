@@ -20,11 +20,8 @@ public class ByteCodeLoader {
     this.byteCodeFile = byteCodeFile;
   }
 
-  public Program loadCodes(boolean debug) {
+  public Program loadCodes() {
       try {
-        if (debug){
-          DebuggerCodeTable.init();
-        }
         int counter = 0;
         File codeFile = new File(byteCodeFile);
         Scanner inputFile = new Scanner(codeFile);
@@ -33,7 +30,7 @@ public class ByteCodeLoader {
           String nextLine = inputFile.nextLine();
           String[] readLine = nextLine.split("\\s+");
 
-          String code_class = DebuggerCodeTable.get(readLine[0]);
+          String code_class = CodeTable.get(readLine[0]);
           ByteCode bytecode = (ByteCode) (Class.forName("interpreter.bytecode." + code_class)
                   .getDeclaredConstructor().newInstance());
           argsList.add(readLine);
@@ -56,5 +53,41 @@ public class ByteCodeLoader {
       Program program = new Program();
       program.addCodes(codeHashMap, argsList);
       return program;
+    }
+
+
+    public Program loadDebuggerCodes() {
+        try {
+            int counter = 0;
+            File codeFile = new File(byteCodeFile);
+            Scanner inputFile = new Scanner(codeFile);
+
+            while (inputFile.hasNext()) {
+                String nextLine = inputFile.nextLine();
+                String[] readLine = nextLine.split("\\s+");
+
+                String code_class = DebuggerCodeTable.get(readLine[0]);
+                ByteCode bytecode = (ByteCode) (Class.forName("interpreter.bytecode." + code_class)
+                        .getDeclaredConstructor().newInstance());
+                argsList.add(readLine);
+                codeHashMap.put(counter, bytecode);
+                counter++;
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File" + byteCodeFile + "not found");
+        } catch (InvocationTargetException e) {
+            System.err.println("Invocation Target Exception");
+        } catch (NoSuchMethodException e) {
+            System.err.println("Method does not exist");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Class does not exist");
+        } catch (InstantiationException e) {
+            System.err.println("Instantiation exception");
+        } catch (IllegalAccessException e) {
+            System.err.println("Illegal Access");
+        }
+        Program program = new Program();
+        program.addCodes(codeHashMap, argsList);
+        return program;
     }
   }
