@@ -22,9 +22,9 @@ public class Debugger extends Interpreter {
 
   @Override
   public void run() {
-    shell = new DebuggerShell(this, sourceFileName);
     Program program = byteCodeLoader.loadDebuggerCodes();
     DebuggerVirtualMachine vm = new DebuggerVirtualMachine(program, this);
+    shell = new DebuggerShell(vm, sourceFileName);
     while (true) {
       DebuggerCommand command = shell.prompt();
       if (command instanceof ExitCommand){

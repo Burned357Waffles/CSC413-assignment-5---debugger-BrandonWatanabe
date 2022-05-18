@@ -1,10 +1,14 @@
 package interpreter.debugger.ui;
 
+import interpreter.debugger.DebuggerVirtualMachine;
+
 public class ContinueCommand extends DebuggerCommand{
     private DebuggerShell shell;
+    private DebuggerVirtualMachine dvm;
 
     public ContinueCommand(DebuggerShell shell){
         this.shell = shell;
+        this.dvm = shell.getDvm();
     }
 
     @Override

@@ -1,6 +1,8 @@
 package interpreter.debugger.ui;
 
 import interpreter.debugger.Debugger;
+import interpreter.debugger.DebuggerVirtualMachine;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -8,14 +10,12 @@ import java.util.HashMap;
 import java.util.Vector;
 
 public class DebuggerShell {
-  private Debugger debugger;
-  private String sourceFileName;
+  private DebuggerVirtualMachine dvm;
   private HashMap<Integer, Vector<String>> lineMap = new HashMap<>();
   private int currentLine = 1;
 
-  public DebuggerShell(Debugger debugger, String sourceFileName) {
-    this.debugger = debugger;
-    this.sourceFileName = sourceFileName;
+  public DebuggerShell(DebuggerVirtualMachine dvm, String sourceFileName) {
+    this.dvm = dvm;
 
     try
     {
@@ -47,6 +47,10 @@ public class DebuggerShell {
     currentLine++;
   }
 
+  public DebuggerVirtualMachine getDvm(){
+    return dvm;
+  }
+
   public DebuggerCommand prompt() {
     Scanner inputScanner = new Scanner(System.in);
     System.out.println("Type ? for help");
@@ -54,7 +58,7 @@ public class DebuggerShell {
     if (userInput.equals("?")) return new HelpCommand();
     else if (userInput.equals("set")) return new SetCommand(this);
     else if (userInput.equals("list")) return new ListCommand(this);
-    else if (userInput.equals("locals")) return new LocalsCommand();
+    else if (userInput.equals("locals")) return new LocalsCommand(this);
     else if (userInput.equals("source")) return new SourceCommand(this, currentLine);
     else if (userInput.equals("step")) return new StepCommand(this);
     else if (userInput.equals("continue")) return new ContinueCommand(this);
