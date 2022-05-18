@@ -18,9 +18,9 @@ public class SetCommand extends DebuggerCommand{
 
     @Override
     public void execute() {
-        HashMap<Integer, Vector<String>> lineMap = shell.getLineMap();
+        HashMap<Integer, Entry> lineMap = shell.getLineMap();
         Scanner input = new Scanner(System.in);
         System.out.println("Enter line number: ");
-        lineMap.get(input.nextInt()).set(1, "true");
+        lineMap.get(input.nextInt()).setBreakpoint(true);
     }
 }

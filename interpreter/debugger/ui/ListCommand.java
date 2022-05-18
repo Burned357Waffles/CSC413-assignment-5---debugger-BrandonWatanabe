@@ -9,8 +9,8 @@ public class ListCommand extends DebuggerCommand{
     @Override
     public void execute() {
         for (int key : shell.getLineMap().keySet()) {
-            boolean isBreakpoint = shell.getLineMap().get(key).get(1).equals("true");
-            if (isBreakpoint) System.out.println("    " + key + ": " + shell.getLineMap().get(key).get(0));
+            if (shell.getLineMap().get(key).isBreakpoint())
+                System.out.println("  * " + key + ": " + shell.getLineMap().get(key).getSourceLine());
         }
     }
 }

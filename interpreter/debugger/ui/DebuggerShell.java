@@ -11,7 +11,7 @@ import java.util.Vector;
 
 public class DebuggerShell {
   private DebuggerVirtualMachine dvm;
-  private HashMap<Integer, Vector<String>> lineMap = new HashMap<>();
+  private HashMap<Integer, Entry> lineMap = new HashMap<>();
   private int currentLine = 1;
 
   public DebuggerShell(DebuggerVirtualMachine dvm, String sourceFileName) {
@@ -25,10 +25,8 @@ public class DebuggerShell {
       while (inputFile.hasNext())
       {
         String nextLine = inputFile.nextLine();
-        Vector<String> lineVector = new Vector<>();
-        lineVector.add(nextLine);
-        lineVector.add("false");
-        lineMap.put(lineCounter, lineVector);
+        Entry entry = new Entry(lineCounter, nextLine, false);
+        lineMap.put(lineCounter, entry);
         lineCounter++;
       }
       inputFile.close();
@@ -38,13 +36,17 @@ public class DebuggerShell {
       System.out.println("File " + sourceFileName + " not found." );
     }
 
-    new SourceCommand(this, currentLine).execute();
+    new SourceCommand(this).execute();
   }
 
-  public HashMap<Integer, Vector<String>> getLineMap() { return lineMap;}
+  public HashMap<Integer, Entry> getLineMap() { return lineMap;}
 
   public void advanceCurrentLine(){
     currentLine++;
+  }
+
+  public int getCurrentLine() {
+    return currentLine;
   }
 
   public DebuggerVirtualMachine getDvm(){
@@ -59,7 +61,7 @@ public class DebuggerShell {
     else if (userInput.equals("set")) return new SetCommand(this);
     else if (userInput.equals("list")) return new ListCommand(this);
     else if (userInput.equals("locals")) return new LocalsCommand(this);
-    else if (userInput.equals("source")) return new SourceCommand(this, currentLine);
+    else if (userInput.equals("source")) return new SourceCommand(this);
     else if (userInput.equals("step")) return new StepCommand(this);
     else if (userInput.equals("continue")) return new ContinueCommand(this);
     else if (userInput.equals("exit")) return new ExitCommand();
