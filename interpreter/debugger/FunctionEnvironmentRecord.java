@@ -37,8 +37,6 @@ public class FunctionEnvironmentRecord {
     recordList.set(4, Integer.toString(currentFuncitonLineNumber));
   }
 
-  public int getFunctionLineNumber(){ return Integer.parseInt(recordList.get(4)); }
-
   public void enter(String symbol, int value) {
     variableOrder.push(symbol);
     if (variableMap.containsKey(symbol)){

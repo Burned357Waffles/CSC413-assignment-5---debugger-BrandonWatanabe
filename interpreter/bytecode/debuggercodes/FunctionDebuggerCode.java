@@ -26,7 +26,5 @@ public class FunctionDebuggerCode extends FunctionCode {
         DebuggerVirtualMachine dvm = (DebuggerVirtualMachine) vm;
         dvm.setInfo(name, start, end);
         dvm.storeCurrentPC();
-        dvm.push(0);
-        dvm.newFrameAt(0);
     }
 }
