@@ -11,9 +11,7 @@ import java.util.Stack;
 public class DebuggerVirtualMachine extends VirtualMachine {
   private Debugger debugger;
   private Program debugProgram;
-  //private RunTimeStack runTimeStack;
   private Stack<FunctionEnvironmentRecord> environmentStack;
-  //private Stack<Integer> returnAddresses;
   private int pc;
   private boolean isRunning;
   private ArrayList<Integer> breakpointList = new ArrayList<>();
@@ -24,9 +22,6 @@ public class DebuggerVirtualMachine extends VirtualMachine {
     this.debugProgram = debugProgram;
     this.debugger = debugger;
     pc = 0;
-    //runTimeStack = new RunTimeStack();
-    //returnAddresses = new Stack<>();
-    //returnAddresses.push(0);
     environmentStack = new Stack<>();
     environmentStack.push(new FunctionEnvironmentRecord());
     isRunning = true;
@@ -90,7 +85,6 @@ public class DebuggerVirtualMachine extends VirtualMachine {
   }
 
   public void returnCode(){
-    System.out.println("RETURN");
     printEnvironmentStack();
     environmentStack.pop();
   }
