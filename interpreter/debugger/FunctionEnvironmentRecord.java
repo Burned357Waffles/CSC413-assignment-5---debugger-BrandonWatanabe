@@ -10,6 +10,8 @@ public class FunctionEnvironmentRecord {
   public Stack<String> variableOrder = new Stack<>();
   public ArrayList<String> recordList = new ArrayList<>();
 
+  public FunctionEnvironmentRecord(){}
+
   public void print(){
     System.out.println("< " + recordList.get(0)
                       + ", " + recordList.get(1)
@@ -31,9 +33,11 @@ public class FunctionEnvironmentRecord {
     recordList.set(3, functionName);
   }
 
-  public void setCurrentLineNumber(int currentLineNumber) {
-    recordList.set(4, Integer.toString(currentLineNumber));
+  public void setFuncitonLineNumber(int currentFuncitonLineNumber) {
+    recordList.set(4, Integer.toString(currentFuncitonLineNumber));
   }
+
+  public int getFunctionLineNumber(){ return Integer.parseInt(recordList.get(4)); }
 
   public void enter(String symbol, int value) {
     variableOrder.push(symbol);
@@ -90,7 +94,7 @@ public class FunctionEnvironmentRecord {
     record.setFunctionInfo("g", 1, 20);
     record.print();
 
-    record.setCurrentLineNumber(5);
+    record.setFuncitonLineNumber(5);
     record.print();
 
     record.enter("a", 4);

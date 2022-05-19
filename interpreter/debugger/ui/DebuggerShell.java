@@ -64,7 +64,7 @@ public class DebuggerShell {
     else if (userInput.equals("source")) return new SourceCommand(this);
     else if (userInput.equals("step")) return new StepCommand(this);
     else if (userInput.equals("continue")) return new ContinueCommand(this);
-    else if (userInput.equals("exit")) return new ExitCommand();
+    else if (userInput.equals("exit") || userInput.equals("x")) return new ExitCommand();
     return new InvalidInputCommand();
   }
 }

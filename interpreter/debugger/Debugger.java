@@ -9,21 +9,21 @@ import interpreter.debugger.ui.ExitCommand;
 
 
 public class Debugger extends Interpreter {
-  protected ByteCodeLoader debuggerByteCodeLoader;
-  String baseFileName;
+  String byteCodeFileName;
   private String sourceFileName;
   private DebuggerShell shell;
 
   public Debugger(String baseFileName) {
-    super(baseFileName);
-    this.baseFileName = baseFileName; // Ex: factorial.x.cod
-    sourceFileName = baseFileName.substring(0, baseFileName.length() - 4); // Ex: factorial.x
+    super(baseFileName + ".x.cod");
+    this.byteCodeFileName = baseFileName + ".x.cod";
+    this.sourceFileName = baseFileName + ".x";
+    DebuggerCodeTable.init();
   }
 
   @Override
   public void run() {
-    Program program = byteCodeLoader.loadDebuggerCodes();
-    DebuggerVirtualMachine vm = new DebuggerVirtualMachine(program, this);
+    Program debugProgram = byteCodeLoader.loadDebuggerCodes();
+    DebuggerVirtualMachine vm = new DebuggerVirtualMachine(debugProgram, this);
     shell = new DebuggerShell(vm, sourceFileName);
     while (true) {
       DebuggerCommand command = shell.prompt();

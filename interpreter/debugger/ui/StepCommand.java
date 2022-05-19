@@ -15,5 +15,6 @@ public class StepCommand extends DebuggerCommand{
     @Override
     public void execute() {
         shell.advanceCurrentLine();
+        dvm.stepLine();
     }
 }

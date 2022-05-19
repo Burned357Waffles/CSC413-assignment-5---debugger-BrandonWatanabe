@@ -46,8 +46,7 @@ public class ReturnCode extends ByteCode
     @Override
     public void execute(VirtualMachine vm)
     {
-        int target = vm.getReturn();
         vm.popFrame();
-        vm.setPC(target);
+        vm.setPC(vm.getReturn());
     }
 }

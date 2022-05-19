@@ -18,10 +18,13 @@ public class SetCommand extends DebuggerCommand{
 
     @Override
     public void execute() {
-        HashMap<Integer, Entry> lineMap = shell.getLineMap();
         Scanner input = new Scanner(System.in);
         System.out.println("Enter line number: ");
         if (!input.hasNextInt()) System.out.println("Invalid input");
-        else lineMap.get(input.nextInt()).setBreakpoint(true);
+        else {
+            int lineNumber = input.nextInt();
+            shell.getLineMap().get(lineNumber).setBreakpoint(true);
+            dvm.setBreakpoint(lineNumber);
+        }
     }
 }

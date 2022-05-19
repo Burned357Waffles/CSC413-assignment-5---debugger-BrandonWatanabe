@@ -14,15 +14,14 @@ public class VirtualMachine {
 
   public VirtualMachine(Program program) {
     this.program = program;
-  }
-
-  public void executeProgram() {
     pc = 0;
     runTimeStack = new RunTimeStack();
     returnAddresses = new Stack<>();
     returnAddresses.push(0);
     isRunning = true;
+  }
 
+  public void executeProgram() {
     while (isRunning) {
       ByteCode code = program.getCode(pc);
       code.execute(this);
